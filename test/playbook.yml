@@ -1,0 +1,38 @@
+- name: Install Nginx on all EC2 instances
+  hosts: servers
+  become: yes
+  tasks:
+    
+    - name: Ensure Nginx is installed
+      apt:
+        name: nginx
+        state: present
+    - name: Ensure Git is installed
+      apt:
+        name: git
+        # update_cache: yes
+        state: present
+    - name: Check Git version
+      shell: git -v
+      register: git_version_output
+    
+    - name: Display Git Version
+      debug: 
+        var: git_version_output.stdout
+    
+    - name: Ensure Curl is installed
+      apt:
+        name: curl
+        state: present
+
+    - name: Ensure Vim is installed
+      apt:
+        name: vim
+        state: present
+
+    - name: Ensure Htop is installed
+      apt:
+        name: htop
+        state: present
+
+
